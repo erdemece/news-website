@@ -40,10 +40,27 @@ $container['logger'] = function ($c) {
     return $logger;
 };
 
+// slim flash
 $container['flash'] = function ($c) {
   return new \Slim\Flash\Messages();
 };
 
+// Image Upload
 $container['imgupload'] = function ($c) {
   return new ImageManager();
+};
+
+// Slugify
+$container['slugger'] = function ($c) {
+  include 'entity/Slugger.php';
+  return new Slugger();
+};
+
+//PHPMailer class
+$container['phpmailer'] = function($c) {
+  $settings = $c->get('settings')['phpmailer'];
+  $phpmailer = new PHPMailer;
+  $phpmailer->setFrom($settings['from'], 'Mailer');
+  $phpmailer->isHTML($settings['ishtml']);
+  return $phpmailer;
 };

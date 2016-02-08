@@ -23,7 +23,11 @@ require __DIR__ . '/../src/dependencies.php';
 require __DIR__ . '/../src/middleware.php';
 
 // Register routes
-require __DIR__ . '/../src/routes.php';
+// require __DIR__ . '/../src/routes/test.router.php';
+$routes = (array) glob(dirname( __DIR__ ).'/src/routes/*.route.php');;
+foreach ($routes as $route) {
+  require $route;
+}
 
 // Run app
 $app->run();
