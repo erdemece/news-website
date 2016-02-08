@@ -1,0 +1,23 @@
+{
+    "name": "erdemece/news-website",
+    "description": "A news website with Slim Framework skeleton application",
+    "keywords": ["microframework","rest","router", "psr7"],
+    "homepage": "https://github.com/erdemece/news-website",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Erdem Ece",
+            "email": "erdem@erdemece.com",
+            "homepage": "http://www.erdemece.com/"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "slim/slim": "~3.0",
+        "slim/twig-view": "^2.0",
+        "monolog/monolog": "^1.17",
+        "intervention/image": "*",
+        "slim/flash": "^0.1.0",
+        "phpmailer/phpmailer": "~5.2"
+    }
+}
