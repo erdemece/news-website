@@ -6,7 +6,7 @@ $app->get('/en/admin', function ($request, $response, $args) {
 
     $messages = $this->flash->getMessages();
 
-    return $this->view->render($response, 'admin/index.twig', [
+    return $this->view->render($response, 'admin/home.twig', [
         'flash' => $messages
     ]);
 });

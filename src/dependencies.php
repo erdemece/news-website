@@ -8,10 +8,12 @@ $container = $app->getContainer();
 // Twig
 $container['view'] = function ($c) {
     $settings = $c->get('settings');
-    $view = new \Slim\Views\Twig($settings['view']['template_path'], $settings['view']['twig']);
+    $view = new \Slim\Views\Twig( $settings['view']['template_path'], $settings['view']['twig']);
+
     // Add extensions
     $view->addExtension(new Slim\Views\TwigExtension($c->get('router'), $c->get('request')->getUri()));
     $view->addExtension(new Twig_Extension_Debug());
+
     return $view;
 };
 

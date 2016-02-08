@@ -6,7 +6,7 @@ $app->get('/', function ($request, $response, $args) {
 
     $messages = $this->flash->getMessages();
 
-    return $this->view->render($response, 'home.twig', [
+    return $this->view->render($response, 'front/home.twig', [
         'flash' => $messages
     ]);
 });
