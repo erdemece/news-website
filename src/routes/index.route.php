@@ -4,11 +4,11 @@ $app->get('/', function ($request, $response, $args) {
     // Sample log message
     $this->logger->info("Slim-Skeleton '/' route");
 
-    $messages = $this->flash->getMessages();
+    $d1 = $this->post->setTitle('Test');
 
-    return $this->view->render($response, 'front/home.twig', [
-        'flash' => $messages
-    ]);
+
+    print_r( $d1->getTitle() ) ;
+
 });
 
 

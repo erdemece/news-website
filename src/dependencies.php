@@ -2,6 +2,7 @@
 // DIC configuration
 
 use Intervention\Image\ImageManager;
+use src\entity;
 
 $container = $app->getContainer();
 
@@ -65,4 +66,10 @@ $container['phpmailer'] = function($c) {
   $phpmailer->setFrom($settings['from'], 'Mailer');
   $phpmailer->isHTML($settings['ishtml']);
   return $phpmailer;
+};
+
+
+//Post class
+$container['post'] = function($c) {
+  return new Post();
 };
