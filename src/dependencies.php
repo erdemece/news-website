@@ -2,7 +2,7 @@
 // DIC configuration
 
 use Intervention\Image\ImageManager;
-use src\entity;
+
 
 $container = $app->getContainer();
 
@@ -71,5 +71,5 @@ $container['phpmailer'] = function($c) {
 
 //Post class
 $container['post'] = function($c) {
-  return new Post();
+  return new admin\Post();
 };

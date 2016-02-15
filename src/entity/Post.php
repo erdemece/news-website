@@ -1,6 +1,5 @@
 <?php
-
-namespace src\entity;
+namespace Post;
 
 class Post {
 

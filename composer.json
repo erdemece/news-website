@@ -19,5 +19,10 @@
         "intervention/image": "*",
         "slim/flash": "^0.1.0",
         "phpmailer/phpmailer": "~5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "admin\\": "src/entity/admin"
+        }
     }
 }
