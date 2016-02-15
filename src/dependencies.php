@@ -55,8 +55,7 @@ $container['imgupload'] = function ($c) {
 
 // Slugify
 $container['slugger'] = function ($c) {
-  include 'entity/Slugger.php';
-  return new Slugger();
+  return new entity\Slugger();
 };
 
 //PHPMailer class

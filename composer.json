@@ -22,7 +22,8 @@
     },
     "autoload": {
         "psr-4": {
-            "admin\\": "src/entity/admin"
+            "admin\\": "src/entity/admin",
+            "entity\\": "src/entity"
         }
     }
 }
