@@ -1,0 +1,61 @@
+{% if flash.info is not empty  %}
+<div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="alert alert-info alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+      {% if flash.info is iterable %}
+        {% for key,  error in flash.info %}
+        {{ error }} <br />
+        {% endfor %}
+      {% else %}
+         {{ flash.info }}
+      {% endif %}
+    </div>
+</div>
+{% endif %}
+
+{% if flash.success is not empty  %}
+<div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="alert alert-success alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+      {% if flash.success is iterable %}
+        {% for key,  error in flash.success %}
+        {{ error }} <br />
+        {% endfor %}
+      {% else %}
+         {{ flash.success }}
+      {% endif %}
+    </div>
+</div>
+{% endif %}
+
+{% if flash.warning is not empty  %}
+<div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="alert alert-warning alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+      <h4>Attention...</h4>
+      {% if flash.warning is iterable %}
+        {% for key,  error in flash.warning %}
+        {{ error }} <br />
+        {% endfor %}
+      {% else %}
+         {{ flash.warning }}
+      {% endif %}
+    </div>
+</div>
+{% endif %}
+
+{% if flash.danger is not empty  %}
+<div class="col-xs-12 col-sm-12 col-md-12">
+  <div class="alert alert-danger alert-dismissible fade in" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+    <h4>Error...</h4>
+    {% if flash.danger is iterable %}
+      {% for key,  error in flash.danger %}
+      {{ error }} <br />
+      {% endfor %}
+    {% else %}
+       {{ flash.danger }}
+    {% endif %}
+  </div>
+</div>
+{% endif %}

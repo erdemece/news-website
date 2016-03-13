@@ -67,8 +67,23 @@ $container['phpmailer'] = function($c) {
   return $phpmailer;
 };
 
-
 //Post class
 $container['post'] = function($c) {
-  return new admin\Post();
+  return new admin\Post($c);
+};
+
+//Post class
+$container['category'] = function($c) {
+  return new admin\Category($c);
+};
+
+//Authentication
+$container['auth'] = function($c) {
+  return new entity\Auth($c);
+};
+
+//Date
+$container['date'] = function($c) {
+  $settings = $c->get('settings')['date'];
+  return new DateTime(  date( 'Y-m-d H:i:s' ), new DateTimeZone($settings['timezone']));
 };

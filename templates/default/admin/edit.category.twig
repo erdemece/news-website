@@ -1,0 +1,125 @@
+{% extends "admin/base.twig" %}
+{% block title %}Edit Category{% endblock %}
+
+{% block base_content %}
+{% embed 'admin/menu.twig' %}{% endembed %}
+{% embed 'admin/main.content.twig' with { title : block('title') } %}
+
+  {% block main_content %}
+
+        <div class="row">
+          <div class="col-xs-12">
+            <form class="form-horizontal" role="form" action="/en/admin/edit-category" method="POST">
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="category-name"> Category Name </label>
+
+                <div class="col-sm-9">
+                  <input type="text" name="categoryName" value="{{categoryDetails.category_name}}" id="category-name" placeholder="Category Name" class="col-xs-10 col-sm-5" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="category-name"> Category Slug </label>
+
+                <div class="col-sm-9">
+                  <input type="text" name="categorySlug" value="{{categoryDetails.category_route}}" id="category-slug" placeholder="Category Slug" class="col-xs-10 col-sm-5" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-paddong-right" for="category-description"> Category Description </label>
+                <div class="col-sm-4">
+                  <textarea name="categoryDescription" class="form-control limited" id="category-description" maxlength="50">{{categoryDetails.category_description}}</textarea>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-paddong-right" for="visibility"> Is Category Visible? </label>
+                <div class="col-sm-9">
+                  <div class="control-group">
+                    <div class="radio">
+                      <label>
+                        <input id="visibility" name="visibility" type="radio" value="yes" class="ace" {% if categoryDetails.category_visible == "yes" %} checked="checked" {% endif %} />
+                        <span class="lbl bigger-120"> Yes</span>
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input id="visibility" name="visibility" type="radio" value="no" class="ace" {% if categoryDetails.category_visible == "no" %} checked="checked" {% endif %} />
+                        <span class="lbl bigger-120"> No</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="parent-category"> Parent </label>
+                <div class="col-sm-4">
+									<select name="categoryParent" class="form-control" id="parent-category">
+                    <option value="0" {% if categoryDetails.category_parent_id == '0' %}selected{% endif %}>None</option>
+                    {% for value in categoryNames %}
+                      <option value="{{value.category_id}}" {% if categoryDetails.category_parent_id == value.category_id %}selected{% endif %}> {{ value.category_name }} </option>
+                    {% endfor %}
+									</select>
+                </div>
+              </div>
+
+              <!-- Submit and reset button -->
+              <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9">
+                  <input type="hidden" name="categoryId" value="{{categoryDetails.category_id}}">
+                  <input type="submit" class="btn btn-info" value="Submit">
+                  <button class="btn" type="reset">
+                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                    Reset
+                  </button>
+                </div>
+              </div>
+              <!-- Button Ends -->
+
+            </form>
+          </div>
+        </div>
+  {% endblock %}
+  {% endembed %}
+{% endblock %}
+{% block javascript %}
+{{ parent() }}
+<script src="/skin/default/admin/js/autosize.js"></script>
+<script src="/skin/default/admin/js/jquery.inputlimiter.1.3.1.js"></script>
+<script type="text/javascript">
+  $("document").ready(function(){
+    $('#category-name').keyup(function() {
+      var categoryName = $('#category-name');
+      if($.trim($(categoryName)).length === 0){
+        $("#category-slug").val('');
+      } else {
+        $.ajax({
+          type: "POST",
+          url: "/en/admin/generate-slug",
+          dataType:"json",
+          cache: false,
+          data: categoryName,
+          success: function(data) {
+              if(data.status == "success") {
+                $("#category-slug").val(data.slug);
+              } else {
+                $("#category-slug").val('');
+              }
+          }
+        });
+      }
+    });
+
+    autosize($('textarea[class*=autosize]'));
+
+    $('textarea.limited').inputlimiter({
+      remText: '%n character%s remaining...',
+      limitText: 'max allowed : %n.'
+    });
+
+  });
+</script>
+{% endblock %}

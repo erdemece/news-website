@@ -1,0 +1,312 @@
+{% extends "admin/base.twig" %}
+{% block title %}Category List{% endblock %}
+
+{% block base_content %}
+{% embed 'admin/menu.twig' %}{% endembed %}
+{% embed 'admin/main.content.twig' with { title : block('title') } %}
+
+  {% block main_content %}
+
+    <div class="col-xs-12">
+      <!-- PAGE CONTENT BEGINS -->
+      <div class="row">
+        <div class="col-xs-12">
+          <table id="category-table" class="table  table-bordered table-hover">
+            <thead>
+              <tr>
+                <th class="center">
+                  <label class="pos-rel">
+                    <input type="checkbox" class="ace" />
+                    <span class="lbl"></span>
+                  </label>
+                </th>
+                <th>Category Name</th>
+                <th>Category Slug</th>
+                <th class="detail-col">Parents</th>
+                <th>Description</th>
+                <th class="hidden-480">Posts</th>
+                <th>
+                  <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+                  Update
+                </th>
+                <th class="hidden-480">Status</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              {% for value in categoryList %}
+              <tr>
+                <td class="center">
+                  <label class="pos-rel">
+                    <input type="checkbox" class="ace" />
+                    <span class="lbl"></span>
+                  </label>
+                </td>
+                <td>
+                  <a href="#">{{value.category_name}}</a>
+                </td>
+                <td>
+                  {{value.category_route}}
+                </td>
+                <td class="center">
+                  <div class="action-buttons">
+                    <a href="#" class="green bigger-140 show-details-btn" title="Show Details">
+                      <i class="ace-icon fa fa-angle-double-down"></i>
+                      <span class="sr-only">Details</span>
+                    </a>
+                  </div>
+                </td>
+                <td>{{value.category_description}}</td>
+                <td class="hidden-480">{{value.post_count}}</td>
+                <td>{{value.category_edited}}</td>
+
+                <td class="hidden-480">
+                  {% if value.category_visible == 'yes' %}
+                    <span class="label label-sm label-success">Visible</span>
+                  {% elseif value.category_visible == 'no' %}
+                    <span class="label label-sm label-warning">Not Visible</span>
+                  {% endif %}
+                </td>
+
+                <td>
+                  <div class="hidden-sm hidden-xs btn-group">
+
+                    <a href="/en/admin/edit-category/{{value.category_id}}" class="btn btn-xs btn-info">
+                      <i class="ace-icon fa fa-pencil bigger-120"></i>
+                    </a>
+
+                    <a href="/en/admin/delete-category/{{value.category_id}}" class="btn btn-xs btn-danger delete">
+                      <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                    </a>
+
+                    {% if value.category_visible == 'yes' %}
+                    <a href="/en/admin/edit-category/{{value.category_id}}/{{value.category_visible}}" class="btn btn-xs btn-warning">
+                      <i class="ace-icon fa fa-flag bigger-120"></i>
+                    </a>
+                    {% elseif value.category_visible == 'no' %}
+                    <a href="/en/admin/edit-category/{{value.category_id}}/{{value.category_visible}}" class="btn btn-xs btn-success">
+                      <i class="ace-icon fa fa-flag bigger-120"></i>
+                    </a>
+                    {% endif %}
+                  </div>
+
+                  <div class="hidden-md hidden-lg">
+                    <div class="inline pos-rel">
+                      <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                        <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                      </button>
+
+                      <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                        <li>
+                          <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                            <span class="blue">
+                              <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                            </span>
+                          </a>
+                        </li>
+
+                        <li>
+                          <a href="/en/admin/edit-category/{{value.category_id}}" class="tooltip-success" data-rel="tooltip" title="Edit">
+                            <span class="green">
+                              <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                            </span>
+                          </a>
+                        </li>
+
+                        <li>
+                          <a href="#" class="tooltip-error delete" data-rel="tooltip" title="Delete">
+                            <span class="red">
+                              <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                            </span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+
+              <!--
+                <tr class="detail-row">
+                  <td class="center">
+                    <label class="pos-rel">
+                      <input type="checkbox" class="ace" />
+                      <span class="lbl"></span>
+                    </label>
+                  </td>
+                  <td> ---
+                    <a href="#">ace.com</a>
+                  </td>
+                  <td>
+                    category-name
+                  </td>
+                  <td class="center"></td>
+                  <td>$45</td>
+                  <td class="hidden-480">3,330</td>
+                  <td>Feb 12</td>
+
+                  <td class="hidden-480">
+                    <span class="label label-sm label-warning">Expiring</span>
+                  </td>
+
+                  <td>
+                    <div class="hidden-sm hidden-xs btn-group">
+                      <button class="btn btn-xs btn-success">
+                        <i class="ace-icon fa fa-check bigger-120"></i>
+                      </button>
+
+                      <button class="btn btn-xs btn-info">
+                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                      </button>
+
+                      <button class="btn btn-xs btn-danger">
+                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                      </button>
+
+                      <button class="btn btn-xs btn-warning">
+                        <i class="ace-icon fa fa-flag bigger-120"></i>
+                      </button>
+                    </div>
+
+                    <div class="hidden-md hidden-lg">
+                      <div class="inline pos-rel">
+                        <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                          <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                          <li>
+                            <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                              <span class="blue">
+                                <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                              </span>
+                            </a>
+                          </li>
+
+                          <li>
+                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                              <span class="green">
+                                <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                              </span>
+                            </a>
+                          </li>
+
+                          <li>
+                            <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                              <span class="red">
+                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                              </span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td> <!-- parent -->
+
+                </tr>
+
+            </tbody>
+          </table>
+        </div><!-- /.span -->
+      </div><!-- /.row -->
+      <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+
+  {% endblock %}
+{% endembed %}
+
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+<script type="text/javascript">
+  jQuery(function($) {
+
+    $("a.delete").click(function(e){
+        if(!confirm('Are you sure?')){
+            e.preventDefault();
+            return false;
+        }
+        return true;
+    });
+    /////////////////////////////////
+    //table checkboxes
+    $('th input[type=checkbox], td input[type=checkbox]').prop('checked', false);
+
+
+    //And for the first simple table, which doesn't have TableTools or dataTables
+    //select/deselect all rows according to table header checkbox
+    var active_class = 'active';
+    $('#category-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
+      var th_checked = this.checked;//checkbox inside "TH" table header
+
+      $(this).closest('table').find('tbody > tr').each(function(){
+        var row = this;
+        if(th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
+        else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
+      });
+    });
+
+    //select/deselect a row when the checkbox is checked/unchecked
+    $('#category-table').on('click', 'td input[type=checkbox]' , function(){
+      var $row = $(this).closest('tr');
+      if($row.is('.detail-row ')) return;
+      if(this.checked) $row.addClass(active_class);
+      else $row.removeClass(active_class);
+    });
+
+
+
+    /********************************/
+    //add tooltip for small view action buttons in dropdown menu
+    $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
+
+    //tooltip placement on right or left
+    function tooltip_placement(context, source) {
+      var $source = $(source);
+      var $parent = $source.closest('table')
+      var off1 = $parent.offset();
+      var w1 = $parent.width();
+
+      var off2 = $source.offset();
+      //var w2 = $source.width();
+
+      if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
+      return 'left';
+    }
+
+
+
+
+    /***************/
+    $('.show-details-btn').on('click', function(e) {
+      e.preventDefault();
+      $(this).closest('tr').next().toggleClass('open');
+      $(this).find(ace.vars['.icon']).toggleClass('fa-angle-double-down').toggleClass('fa-angle-double-up');
+    });
+    /***************/
+
+
+
+
+
+    /**
+    //add horizontal scrollbars to a simple table
+    $('#category-table').css({'width':'2000px', 'max-width': 'none'}).wrap('<div style="width: 1000px;" />').parent().ace_scroll(
+      {
+      horizontal: true,
+      styleClass: 'scroll-top scroll-dark scroll-visible',//show the scrollbars on top(default is bottom)
+      size: 2000,
+      mouseWheelLock: true
+      }
+    ).css('padding-top', '12px');
+    */
+
+
+  })
+</script>
+
+{% endblock %}

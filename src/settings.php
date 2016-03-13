@@ -16,7 +16,7 @@ return [
         // PDO settings
         'pdo' => [
             'host' => 'localhost',
-            'dbname' => 'news',
+            'dbname' => 'news_website',
             'port' => '',
             'timeout' => '15',
             'username' => 'root',
@@ -33,6 +33,11 @@ return [
         'phpmailer' => [
           'from' => 'sales@pizzastore.dev',
           'ishtml' => 'true'
+        ],
+
+        // Timezone
+        'date' => [
+          'timezone' => 'Europe/London',
         ]
     ],
 ];
