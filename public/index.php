@@ -24,7 +24,7 @@ require __DIR__ . '/../src/middleware.php';
 
 // Register routes
 // require __DIR__ . '/../src/routes/test.router.php';
-$routes = (array) glob(dirname( __DIR__ ).'/src/routes/*.route.php');;
+$routes = (array) glob(dirname( __DIR__ ).'/src/routes/*/*.route.php');
 foreach ($routes as $route) {
   require $route;
 }

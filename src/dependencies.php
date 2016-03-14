@@ -2,7 +2,7 @@
 // DIC configuration
 
 use Intervention\Image\ImageManager;
-
+use src\entity;
 
 $container = $app->getContainer();
 
@@ -86,4 +86,29 @@ $container['auth'] = function($c) {
 $container['date'] = function($c) {
   $settings = $c->get('settings')['date'];
   return new DateTime(  date( 'Y-m-d H:i:s' ), new DateTimeZone($settings['timezone']));
+};
+
+// CategoryList class
+$container['Category'] = function($c) {
+  return new front\Category($c);
+};
+
+// Article class
+$container['Article'] = function($c) {
+  return new front\Article($c);
+};
+
+// OtherF class
+$container['OtherF'] = function($c) {
+  return new front\OtherF($c);
+};
+
+// Comments class
+$container['Comment'] = function($c) {
+  return new front\Comment($c);
+};
+
+// Statistics class
+$container['Statistics'] = function($c) {
+  return new front\Statistics($c);
 };

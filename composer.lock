@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ed1c95e8dfeaf60f3c004a7babd03c7f",
+    "hash": "cc5a7db5a8a9d1be3f0fae2f44453045",
     "content-hash": "751380cc6648fbb812917d360ccb3eb1",
     "packages": [
         {
@@ -516,16 +516,16 @@
         },
         {
             "name": "slim/slim",
-            "version": "3.2.2",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "1d99b8846c784d885201b2b709bfedb63656ed30"
+                "reference": "939f2e85d57508de9cff241d10091cd972f221c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/1d99b8846c784d885201b2b709bfedb63656ed30",
-                "reference": "1d99b8846c784d885201b2b709bfedb63656ed30",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/939f2e85d57508de9cff241d10091cd972f221c3",
+                "reference": "939f2e85d57508de9cff241d10091cd972f221c3",
                 "shasum": ""
             },
             "require": {
@@ -579,7 +579,7 @@
                 "micro",
                 "router"
             ],
-            "time": "2016-03-05 19:36:16"
+            "time": "2016-03-10 21:37:40"
         },
         {
             "name": "slim/twig-view",

@@ -1,7 +1,8 @@
 <?php
 namespace admin;
+use PDO;
 
-class Category {
+class Post {
 
   public $category_id;
   public $category_name;
@@ -12,41 +13,75 @@ class Category {
   public $category_created_by;
 
   public $errors;
+  public $lastInsertId;
 
   public function __construct( $container ) {
     $this->pdo = $container->get('pdo');
   }
 
-}
-
-interface CategoryInterface {
-  public function find( $category_id );
-  public function create( Category $category );
-  public function remove( Category $category );
-}
-
-class CategoryRepository implements CategoryInterface {
-  protected $db;
-
-  public function __construct ( $container ) {
-    $this->db = $container->get( 'pdo' );
+  public function addPost( $articleTitle, $articleSlug, $articleShortDescription, $articleContent, $articleAuthor, $isActive, $articleCategory) {
+    $sql = "INSERT INTO article (article_id, article_title, article_slug, article_short_description, article_main_content, article_author_id, article_created, article_updated, is_active )
+                        VALUES( NULL, :article_title, :article_slug, :article_short_description, :article_main_content, :article_author_id, NOW(), NOW(), :is_active )";
+    try {
+      $query = $this->pdo->preparae( $sql );
+      if ( $query->execute( array( 'article_title' => $articleTitle, 'article_slug' => $articleSlug, 'article_short_description' => $articleShortDescription, ':article_main_content' => $articleContent, ':article_author_id' => $articleAuthor, ':is_active' => $isActive) ) ) {
+        if ( $this->addArticleCategory( $articleCategory, $this->pdo->lastInsertId() ) ) {
+          $this->lastInsertId = $this->pdo->lastInsertId();
+          return true;
+        }
+        return false;
+      }
+      return false;
+    } catch ( PDOException $pe ) {
+      return false;
+    }
   }
 
-  public function find( $category_id ) {
-    $sql = "SELECT category_id, category_name FROM category WHERE category_id = :category_id ORDER BY category_order";
-
+  public function addArticleImage( $articleId, $imagePath ) {
+    $sql = "INSERT INTO article_image (id, article_id, image_path ) VALUES (NULL, :article_id, :image_path)";
     try {
       $query = $this->pdo->prepare( $sql );
-
-      if ( $query->execute( array ( 'category_id' => $category_id ) ) ) {
-        if ( $query->rowCount() ) {
-          return $value;
-        }
+      if ( $query->execute( array( ':article_id' => $articleId, 'image_path' => $imagePath ) ) ) {
+        return ture;
       }
+    } catch ( PDOException $pe ) {
+      return false;
     }
-    catch ( PDOException $pe ) {
-      trigger_error( 'database error:' . $pe->getMessage() );
+  }
+
+  public function addArticleCategory( $categoryId, $articleId ) {
+
+    $args = array_fill( 0, count($categoryId[0]), ':category_id' );
+    $sql = "INSERT INTO article_category (id, category_id, article_id) VALUES ( NULL, implode( ',' $args ), :article_id )";
+    try {
+      $query = $this->pdo->prepare( $sql );
+      foreach ( $categoryId as $row ) {
+        $query->execute( array( 'category_id' => $row, 'article_id' => $article_id ) );
+      }
+      if ( $query->errorInfo() == '0' ) {
+        return true;
+      }
+      return false;
+    } catch( PDOException $pe ) {
+      return false;
     }
+  }
+
+  public function getTags ($tags) {
+    $sql = "SELECT tag_keyword FROM tags WHERE tag_keyword LIKE ? ORDER BY tag_count";
+    try {
+      $query = $this->pdo->prepare($sql);
+      if( $query->execute( array( "$tags%" ) ) ) {
+        if ( $query->rowCount() >= 1 ) {
+          return $query->fetch(PDO::FETCH_ASSOC);
+        }
+        return false;
+      }
+      return false;
+    } catch ( PDOException $pe) {
+      return false;
+    }
+
   }
 }
 
