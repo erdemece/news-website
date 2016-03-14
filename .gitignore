@@ -1,4 +1,5 @@
-/vendor/
 /logs/*
 /templates/cache/*
 !/logs/README.md
+README.md
+CONTRIBUTING.md
