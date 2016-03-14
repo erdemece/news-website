@@ -79,7 +79,7 @@ $container['category'] = function($c) {
 
 //Authentication
 $container['auth'] = function($c) {
-  return new entity\Auth($c);
+  return new Auth($c);
 };
 
 //Date
