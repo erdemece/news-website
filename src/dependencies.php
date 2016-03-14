@@ -2,7 +2,6 @@
 // DIC configuration
 
 use Intervention\Image\ImageManager;
-use src\entity;
 
 $container = $app->getContainer();
 
@@ -79,7 +78,7 @@ $container['category'] = function($c) {
 
 //Authentication
 $container['auth'] = function($c) {
-  return new Auth($c);
+  return new entity\Auth($c);
 };
 
 //Date
