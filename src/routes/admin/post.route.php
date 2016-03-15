@@ -26,7 +26,7 @@ $app->get('/en/admin/add-article', function ($request, $response, $args) {
 
      print_r($request->getParsedBody());
     //  $errors = array();
-     //
+    //
     //  if ( file_exists( $_FILES['article-image']['tmp_name'] ) ) {
     //      $allowedTypes = array( IMAGETYPE_PNG, IMAGETYPE_JPEG, IMAGETYPE_GIF );
     //      $detectedTypes = exif_imagetype( $_FILES['article']['tmp_name'] );
@@ -40,7 +40,7 @@ $app->get('/en/admin/add-article', function ($request, $response, $args) {
     //          $errors['filetype_error'] = 'Only png, jpg, jpeg and gif allowed!';
     //      }
     //  }
-     //
+    //
     //  if ( count( $errors ) > 0 ) {
     //    $this->flash->addMessage('danger', $errors);
     //    return $response->withStatus(301)->withHeader('Location', '/en/admin/add-article');
@@ -56,7 +56,7 @@ $app->get('/en/admin/add-article', function ($request, $response, $args) {
     //        $picturePath = '/'.$picturePath;
     //      }
     //  }
-     //
+    //
     //  if( $insert !== false ) {
     //    $this->flash->addMessage('success', 'Category succesfuly added!');
     //    return $response->withStatus(301)->withHeader('Location', '/en/admin/category-list');

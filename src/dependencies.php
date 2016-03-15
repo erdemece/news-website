@@ -113,6 +113,6 @@ $container['Statistics'] = function($c) {
 };
 
 // Site Settings
-// $container['siteSettings'] = function($c) {
-//   return new entity\SiteSettings($c);
-// };
+$container['siteSettings'] = function($c) {
+  return new admin\Settings($c);
+};

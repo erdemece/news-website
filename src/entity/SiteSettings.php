@@ -32,21 +32,18 @@ class SiteSettings {
           $row['setting'],
           $row['value']
         );
-        $response = $next(
-          $request->withAttribute(
-            $row['setting'],
-            $row['value']
-          ),
-          $response
-        );
       }
+      $response = $next(
+        $request,
+        $response
+      );
     }
     return $response;
   }
   protected function getSettings() {
     try {
       $stmt = $this->pdo->query( 'SELECT setting, value, description FROM site_settings' );
-      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $stmt->fetchAll();
     } catch ( PDOException $pe ) {
       return false;
     }

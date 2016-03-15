@@ -7,137 +7,137 @@
 
   {% block main_content %}
 
-        <div class="row">
-          <div class="col-xs-12">
-            <form class="form-horizontal" role="form" action="/en/admin/add-article" method="POST" enctype="multipart/form-data">
+    <div class="row">
+      <div class="col-xs-12">
+        <form class="form-horizontal" role="form" action="/en/admin/add-article" method="POST" enctype="multipart/form-data">
 
-              <div class="form-group">
-                <div class="col-sm-9">
-                  <label for="article-title">News Title</label>
-                  <input type="text" name="article-title" id="article-title" placeholder="Article Title" class="form-control" required/>
-                </div>
-              </div>
-
-              <div class="form-group">
-
-                <div class="col-xs-12 col-sm-6">
-                  <label for="article-category">Choose Category</label>
-                  <select multiple="" name="article-category[]" class="chosen-select form-control" id="article-category" data-placeholder="Choose a Category" required>
-                    {% for value in categoryNames %}
-                    <option value="{{value.category_id}}">{{value.category_name}}</option>
-                    {% endfor %}
-                  </select>
-                </div>
-
-                <div class="col-xs-12 col-sm-6">
-                  <label for="postPicture">Choose Date</label>
-                  <!-- #section:plugins/date-time.datetimepicker -->
-                  <div class="input-group">
-                    <input id="article-date" name="article-date" type="text" class="form-control" value="{{currentTime}}" />
-                    <span class="input-group-addon">
-                      <i class="fa fa-clock-o bigger-110"></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="hr hr-double dotted"></div>
-
-              <textarea name="article-content"></textarea>
-
-              <div class="hr hr-double dotted"></div>
-
-              <div class="form-group">
-
-                <div class="col-xs-12 col-sm-4">
-                  <label for="article-image">Add Picture</label>
-                  <div class="form-group">
-                    <div class="col-xs-12">
-                      <input type="file" name="article-image" id="article-image" />
-                      <!-- <input multiple="" name="postPictureMulti[]" type="file" id="id-input-file-3" /> -->
-                      <!-- /section:custom/file-input -->
-                    </div>
-                  </div>
-
-                </div>
-
-                <div class="col-xs-12 col-sm-4">
-                  <label for="article-tags">Add Tags</label>
-                  <div class="form-group">
-                    <div class="col-xs-12">
-                      <input type="text" name="article-tags" id="article-tags" value="" placeholder="Enter tags ..." />
-                      <!-- /section:plugins/input.tag-input -->
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-4">
-
-                  <div class="form-group" >
-
-                    <div class="col-xs-12 col-sm-6">
-
-                      <div class="control-group">
-                        <label class="control-label">Is Article</label>
-
-                        <div class="radio">
-                          <label>
-                            <input name="is-article-active" type="radio" value="active" class="ace" />
-                            <span class="lbl"> Active</span>
-                          </label>
-                        </div>
-
-                        <div class="radio">
-                          <label>
-                            <input name="is-article-active" type="radio" value="draft" class="ace" />
-                            <span class="lbl"> Draft</span>
-                          </label>
-                        </div>
-
-                      </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6">
-
-                      <div class="control-group">
-                        <label class="control-label">Comments</label>
-
-                        <div class="radio">
-                          <label>
-                            <input name="article-comment" type="radio" value="on" class="ace" />
-                            <span class="lbl"> On</span>
-                          </label>
-                        </div>
-
-                        <div class="radio">
-                          <label>
-                            <input name="article-comment" type="radio" value="off" class="ace" />
-                            <span class="lbl"> Off</span>
-                          </label>
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="clearfix form-actions">
-
-                <div class="col-md-offset-3 col-md-9">
-
-                  <input type="submit" class="btn btn-info" value="Submit">
-                  <button class="btn" type="reset">
-                    <i class="ace-icon fa fa-undo bigger-110"></i>
-                    Reset
-                  </button>
-
-                </div>
-
-              </div>
-            </form>
+          <div class="form-group">
+            <div class="col-sm-9">
+              <label for="article-title">News Title</label>
+              <input type="text" name="article-title" id="article-title" placeholder="Article Title" class="form-control" required/>
+            </div>
           </div>
-        </div>
+
+          <div class="form-group">
+
+            <div class="col-xs-12 col-sm-6">
+              <label for="article-category">Choose Category</label>
+              <select multiple="" name="article-category[]" class="chosen-select form-control" id="article-category" data-placeholder="Choose a Category" required>
+                {% for value in categoryNames %}
+                <option value="{{value.category_id}}">{{value.category_name}}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+              <label for="postPicture">Choose Date</label>
+              <!-- #section:plugins/date-time.datetimepicker -->
+              <div class="input-group">
+                <input id="article-date" name="article-date" type="text" class="form-control" value="{{currentTime}}" />
+                <span class="input-group-addon">
+                  <i class="fa fa-clock-o bigger-110"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hr hr-double dotted"></div>
+
+          <textarea name="article-content"></textarea>
+
+          <div class="hr hr-double dotted"></div>
+
+          <div class="form-group">
+
+            <div class="col-xs-12 col-sm-4">
+              <label for="article-image">Add Picture</label>
+              <div class="form-group">
+                <div class="col-xs-12">
+                  <input type="file" name="article-image" id="article-image" />
+                  <!-- <input multiple="" name="postPictureMulti[]" type="file" id="id-input-file-3" /> -->
+                  <!-- /section:custom/file-input -->
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-xs-12 col-sm-4">
+              <label for="article-tags">Add Tags</label>
+              <div class="form-group">
+                <div class="col-xs-12">
+                  <input type="text" name="article-tags" id="article-tags" value="" placeholder="Enter tags ..." />
+                  <!-- /section:plugins/input.tag-input -->
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-4">
+
+              <div class="form-group" >
+
+                <div class="col-xs-12 col-sm-6">
+
+                  <div class="control-group">
+                    <label class="control-label">Is Article</label>
+
+                    <div class="radio">
+                      <label>
+                        <input name="is-article-active" type="radio" value="active" class="ace" />
+                        <span class="lbl"> Active</span>
+                      </label>
+                    </div>
+
+                    <div class="radio">
+                      <label>
+                        <input name="is-article-active" type="radio" value="draft" class="ace" />
+                        <span class="lbl"> Draft</span>
+                      </label>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6">
+
+                  <div class="control-group">
+                    <label class="control-label">Comments</label>
+
+                    <div class="radio">
+                      <label>
+                        <input name="article-comment" type="radio" value="on" class="ace" />
+                        <span class="lbl"> On</span>
+                      </label>
+                    </div>
+
+                    <div class="radio">
+                      <label>
+                        <input name="article-comment" type="radio" value="off" class="ace" />
+                        <span class="lbl"> Off</span>
+                      </label>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="clearfix form-actions">
+
+            <div class="col-md-offset-3 col-md-9">
+
+              <input type="submit" class="btn btn-info" value="Submit">
+              <button class="btn" type="reset">
+                <i class="ace-icon fa fa-undo bigger-110"></i>
+                Reset
+              </button>
+
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
   {% endblock %}
   {% endembed %}
 {% endblock %}
