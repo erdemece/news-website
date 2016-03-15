@@ -111,3 +111,8 @@ $container['Comment'] = function($c) {
 $container['Statistics'] = function($c) {
   return new front\Statistics($c);
 };
+
+// Site Settings
+// $container['siteSettings'] = function($c) {
+//   return new entity\SiteSettings($c);
+// };
