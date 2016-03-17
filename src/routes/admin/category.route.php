@@ -11,48 +11,50 @@ $app->get('/en/admin/add-category', function ($request, $response, $args) {
 
 });//->add($authenticate);
 
-  $app->post('/en/admin/add-category', function ($request, $response, $args) {
+$app->post('/en/admin/add-category', function ($request, $response, $args) {
 
-    $this->logger->info("Slim-Skeleton '/' route");
+  $this->logger->info("Slim-Skeleton '/' route");
 
-    $categoryParent      = filter_var( $request->getParsedBody()['category-parent'], FILTER_SANITIZE_INT );
-    $categoryName        = filter_var( $request->getParsedBody()['category-name'], FILTER_SANITIZE_STRING );
-    $categorySlug        = filter_var( $request->getParsedBody()['category-slug'], FILTER_SANITIZE_STRING );
-    $categoryDescription = filter_var( $request->getParsedBody()['category-description'], FILTER_SANITIZE_STRING );
-    $visibility          = filter_var( $request->getParsedBody()['visibility'], FILTER_SANITIZE_STRING );
+  $categoryParent      = filter_var( $request->getParsedBody()['category-parent'], FILTER_SANITIZE_NUMBER_INT );
+  $categoryName        = filter_var( $request->getParsedBody()['category-name'], FILTER_SANITIZE_STRING );
+  $categorySlug        = filter_var( $request->getParsedBody()['category-slug'], FILTER_SANITIZE_STRING );
+  $categoryDescription = filter_var( $request->getParsedBody()['category-description'], FILTER_SANITIZE_STRING );
+  $visibility          = filter_var( $request->getParsedBody()['visibility'], FILTER_SANITIZE_STRING );
 
-    $insert = $this->category->addCategory( $categoryParent, $categoryName, $categorySlug, $categoryDescription, $visibility );
+  $insert = $this->category->addCategory( $categoryParent, $categoryName, $categorySlug, $categoryDescription, $visibility );
 
-    if( $insert !== false ) {
-      $this->flash->addMessage('success', 'Category succesfuly added!');
-      return $response->withStatus(301)->withHeader('Location', '/en/admin/category-list');
-    } else {
-      $this->flash->addMessage('warning', $this->category->errors);
-      return $response->withStatus(301)->withHeader('Location', '/en/admin/add-category');
-    }
+  if( $insert !== false ) {
+    $this->flash->addMessage('success', 'Category succesfuly added!');
+    return $response->withStatus(301)->withHeader('Location', '/en/admin/category-list');
+  } else {
+    $this->flash->addMessage('warning', $this->category->errors);
+    return $response->withStatus(301)->withHeader('Location', '/en/admin/add-category');
+  }
 
-  });//->add($authenticate);
+});//->add($authenticate);
 
-  $app->post('/en/admin/edit-category', function ($request, $response, $args) {
+$app->post('/en/admin/edit-category', function ($request, $response, $args) {
 
-    $this->logger->info("Edit Category '/edit-category' route");
+  $this->logger->info("Edit Category '/edit-category' route");
 
-    $updateCategory = $this->category->editCategory( $request->getParsedBody()['category-id'],
-                                  $request->getParsedBody()['category-parent'],
-                                  $request->getParsedBody()['category-name'],
-                                  $request->getParsedBody()['category-slug'],
-                                  $request->getParsedBody()['category-description'],
-                                  $request->getParsedBody()['visibility'] );
+  $categoryId          = filter_var( $request->getParsedBody()['category-id'], FILTER_SANITIZE_NUMBER_INT );
+  $categoryParent      = filter_var( $request->getParsedBody()['category-parent'], FILTER_SANITIZE_NUMBER_INT );
+  $categoryName        = filter_var( $request->getParsedBody()['category-name'], FILTER_SANITIZE_STRING );
+  $categorySlug        = filter_var( $request->getParsedBody()['category-slug'], FILTER_SANITIZE_STRING );
+  $categoryDescription = filter_var( $request->getParsedBody()['category-description'], FILTER_SANITIZE_STRING );
+  $visibility          = filter_var( $request->getParsedBody()['visibility'], FILTER_SANITIZE_STRING );
 
-    if( $updateCategory !== false ) {
-      $this->flash->addMessage('success', 'Category succesfuly edited!');
-      return $response->withStatus(301)->withHeader('Location', '/en/admin/category-list');
-    } else {
-      $this->flash->addMessage('danger', $this->category->errors);
-      return $response->withStatus(301)->withHeader('Location', '/en/admin/edit-category/'.$request->getParsedBody()['category-id']);
-    }
+  $updateCategory = $this->category->editCategory( $categoryId, $categoryParent, $categoryName, $categorySlug, $categoryDescription, $visibility );
 
-  });
+  if( $updateCategory !== false ) {
+    $this->flash->addMessage('success', 'Category succesfuly edited!');
+    return $response->withStatus(301)->withHeader('Location', '/en/admin/category-list');
+  } else {
+    $this->flash->addMessage('danger', $this->category->errors);
+    return $response->withStatus(301)->withHeader('Location', '/en/admin/edit-category/'.$request->getParsedBody()['category-id']);
+  }
+
+});
 
 $app->get('/en/admin/category-list', function ($request, $response, $args) {
 

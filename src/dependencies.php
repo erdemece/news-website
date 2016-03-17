@@ -127,6 +127,10 @@ $container['siteSettings'] = function($c) {
 };
 
 // Site Settings
-$container['users'] = function($c) {
+$container['frontUsers'] = function($c) {
   return new entity\Users($c);
+};
+
+$container['users'] = function($c) {
+  return new admin\Users($c);
 };

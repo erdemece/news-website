@@ -19,7 +19,7 @@ return [
             'dbname' => 'news_website',
             'port' => '',
             'timeout' => '15',
-            'username' => 'root',
+            'username' => 'news_website',
             'password' => 'Er751270@'
         ],
 

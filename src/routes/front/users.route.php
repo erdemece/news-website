@@ -20,13 +20,14 @@ $app->post('/login', function ($request, $response, $args) {
     $errors = array();
 
     $username = filter_var( $request->getParsedBody()['username'], FILTER_SANITIZE_STRING );
+    $username = strtolower( $username );
     $password = filter_var( $request->getParsedBody()['password'], FILTER_SANITIZE_STRING );
 
-    if ( !$this->users->validateUsername( $username ) ) {
+    if ( !$this->frontUsers->validateUsername( $username ) ) {
       $errors[0] = "Only '.', '-' and '_' without space and numbers allowed for the user name";
     }
 
-    if ( !$this->users->validatePassword( $password ) ) {
+    if ( !$this->frontUsers->validatePassword( $password ) ) {
       $errors[1] = "Password must have at least 8 character, at least a number and special characters such as '@!_'";
     }
 
@@ -36,7 +37,7 @@ $app->post('/login', function ($request, $response, $args) {
       }
       return $response->withStatus(302)->withHeader('Location', '/login');
     } else {
-      $loginUser = $this->users->loginUser( $username, $password );
+      $loginUser = $this->frontUsers->loginUser( $username, $password );
       if( $loginUser !== false ) {
         $this->flash->addMessage('success', 'Welcome back '.$username);
         return $response->withStatus(302)->withHeader('Location', '/');
@@ -77,14 +78,16 @@ $app->post('/register', function ($request, $response, $args) {
     $errors = array();
 
     $username = filter_var( $request->getParsedBody()['username'], FILTER_SANITIZE_STRING );
+    $username = strtolower( $username );
     $email = filter_var( $request->getParsedBody()['email'], FILTER_SANITIZE_EMAIL );
+    $email = strtolower( $email );
     $password = filter_var( $request->getParsedBody()['password'], FILTER_SANITIZE_STRING );
 
-    if ( !$this->users->validateUsername( $username ) ) {
+    if ( !$this->frontUsers->validateUsername( $username ) ) {
       $errors[0] = "Only '.', '-' and '_' without space and numbers allowed for the user name";
     }
 
-    if ( !$this->users->validatePassword( $password ) ) {
+    if ( !$this->frontUsers->validatePassword( $password ) ) {
       $errors[1] = "Password must have at least 8 character, at least a number and special characters such as '@!_'";
     }
 
@@ -98,7 +101,7 @@ $app->post('/register', function ($request, $response, $args) {
       }
       return $response->withStatus(302)->withHeader('Location', '/register');
     } else {
-      $isUserExist = $this->users->isUserExist( $username, $email );
+      $isUserExist = $this->frontUsers->isUserExist( $username, $email );
       if ( $isUserExist !== false ) {
         if( $isUserExist['username'] == $username ) {
           $this->flash->addMessage('warning', 'The username ( '.$username.' ) you choose is already exist ');
@@ -109,13 +112,13 @@ $app->post('/register', function ($request, $response, $args) {
           return $response->withStatus(302)->withHeader('Location', '/register');
         }
       } else {
-        $addUser = $this->users->addUser( $username, $email, $password );
+        $addUser = $this->frontUsers->addUser( $username, $email, $password );
         if( $addUser == false ) {
           $this->flash->addMessage('warning', 'We cannot register you at the moment.');
           return $response->withStatus(302)->withHeader('Location', '/register');
         } else {
           $emailTemplate = $this->view->render($response, 'front\user.activation.template.twig' );
-          $sendActivationEmail = $this->users->sendActivationEmail( $_SESSION['username'], $template );
+          $sendActivationEmail = $this->frontUsers->sendActivationEmail( $_SESSION['username'], $template );
 
           if ( $emailTemplate == false ) {
             $this->flash->addMessage('warning', 'We are not able send you activation email. If your email address is not real please update your e-mail address.');

@@ -12,98 +12,132 @@
 
       <b class="arrow"></b>
     </li>
+    {% if user_level > 1 %}
+      <li class="">
+        <a href="#" class="dropdown-toggle">
+          <i class="menu-icon fa fa-desktop"></i>
+          <span class="menu-text">
+            Articles
+          </span>
 
-    <li class="">
-      <a href="#" class="dropdown-toggle">
-        <i class="menu-icon fa fa-desktop"></i>
-        <span class="menu-text">
-          Articles
-        </span>
+          <b class="arrow fa fa-angle-down"></b>
+        </a>
 
-        <b class="arrow fa fa-angle-down"></b>
-      </a>
+        <b class="arrow"></b>
 
-      <b class="arrow"></b>
+        <ul class="submenu">
+          <li class="">
+            <a href="/en/admin/add-article">
+              <i class="menu-icon fa fa-caret-right"></i>
+              Add Article
+            </a>
+          </li>
 
-      <ul class="submenu">
-        <li class="">
-          <a href="/en/admin/add-article">
-            <i class="menu-icon fa fa-caret-right"></i>
-            Add Article
-          </a>
-        </li>
+          <li class="">
+            <a href="/en/admin/list-articles">
+              <i class="menu-icon fa fa-caret-right"></i>
+              Article List
+            </a>
 
-        <li class="">
-          <a href="/en/admin/list-articles">
-            <i class="menu-icon fa fa-caret-right"></i>
-            Article List
-          </a>
+            <b class="arrow"></b>
+          </li>
+        </ul>
+      </li>
+      {% if user_level >= 3 %}
+      <li class="">
+        <a href="#" class="dropdown-toggle">
+          <i class="menu-icon fa fa-desktop"></i>
+          <span class="menu-text">
+            Category
+          </span>
 
-          <b class="arrow"></b>
-        </li>
-      </ul>
-    </li>
+          <b class="arrow fa fa-angle-down"></b>
+        </a>
 
-    <li class="">
-      <a href="#" class="dropdown-toggle">
-        <i class="menu-icon fa fa-desktop"></i>
-        <span class="menu-text">
-          Category
-        </span>
+        <b class="arrow"></b>
 
-        <b class="arrow fa fa-angle-down"></b>
-      </a>
+        <ul class="submenu">
+          <li class="">
+            <a href="/en/admin/add-category">
+              <i class="menu-icon fa fa-caret-right"></i>
+              Add Category
+            </a>
+          </li>
 
-      <b class="arrow"></b>
+          <li class="">
+            <a href="/en/admin/category-list">
+              <i class="menu-icon fa fa-caret-right"></i>
+              Category List
+            </a>
 
-      <ul class="submenu">
-        <li class="">
-          <a href="/en/admin/add-category">
-            <i class="menu-icon fa fa-caret-right"></i>
-            Add Category
-          </a>
-        </li>
+            <b class="arrow"></b>
+          </li>
+        </ul>
+      </li>
+      {% endif %}
+      {% if user_level == 4 %}
+      <li class="">
+        <a href="#" class="dropdown-toggle">
+          <i class="menu-icon fa fa-desktop"></i>
+          <span class="menu-text">
+            Users
+          </span>
 
-        <li class="">
-          <a href="/en/admin/category-list">
-            <i class="menu-icon fa fa-caret-right"></i>
-            Category List
-          </a>
+          <b class="arrow fa fa-angle-down"></b>
+        </a>
 
-          <b class="arrow"></b>
-        </li>
-      </ul>
-    </li>
-    <li class="">
-      <a href="#" class="dropdown-toggle">
-        <i class="menu-icon fa fa-desktop"></i>
-        <span class="menu-text">
-          Settings
-        </span>
+        <b class="arrow"></b>
 
-        <b class="arrow fa fa-angle-down"></b>
-      </a>
+        <ul class="submenu">
+          <li class="">
+            <a href="/en/admin/add-user">
+              <i class="menu-icon fa fa-caret-right"></i>
+              Add User
+            </a>
+          </li>
 
-      <b class="arrow"></b>
+          <li class="">
+            <a href="/en/admin/user-list">
+              <i class="menu-icon fa fa-caret-right"></i>
+              User List
+            </a>
 
-      <ul class="submenu">
-        <li class="">
-          <a href="/en/admin/add-category">
-            <i class="menu-icon fa fa-caret-right"></i>
-            General
-          </a>
-        </li>
+            <b class="arrow"></b>
+          </li>
+        </ul>
+      </li>
+      <li class="">
+        <a href="#" class="dropdown-toggle">
+          <i class="menu-icon fa fa-desktop"></i>
+          <span class="menu-text">
+            Settings
+          </span>
 
-        <li class="">
-          <a href="/en/admin/settings/logo">
-            <i class="menu-icon fa fa-caret-right"></i>
-            Logo
-          </a>
+          <b class="arrow fa fa-angle-down"></b>
+        </a>
 
-          <b class="arrow"></b>
-        </li>
-      </ul>
-    </li>
+        <b class="arrow"></b>
+
+        <ul class="submenu">
+          <li class="">
+            <a href="/en/admin/add-category">
+              <i class="menu-icon fa fa-caret-right"></i>
+              General
+            </a>
+          </li>
+
+          <li class="">
+            <a href="/en/admin/settings/logo">
+              <i class="menu-icon fa fa-caret-right"></i>
+              Logo
+            </a>
+
+            <b class="arrow"></b>
+          </li>
+        </ul>
+      </li>
+      {% endif %}
+    {% endif %}
   </ul><!-- /.nav-list -->
 
   <!-- #section:basics/sidebar.layout.minimize -->

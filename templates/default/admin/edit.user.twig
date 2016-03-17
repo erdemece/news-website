@@ -1,0 +1,115 @@
+{% extends "admin/base.twig" %}
+{% block title %}Edit User{% endblock %}
+
+{% block base_content %}
+{% embed 'admin/menu.twig' %}{% endembed %}
+{% embed 'admin/main.content.twig' with { title : block('title') } %}
+
+  {% block main_content %}
+
+        <div class="row">
+          <div class="col-xs-12">
+            <form class="form-horizontal" role="form" action="/en/admin/edit-user" method="POST">
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="username"> User Name </label>
+                <div class="col-sm-9">
+                  <input type="text" name="username" value="{{userList.username}}" id="username" placeholder="Username" class="col-xs-10 col-sm-5" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="email"> Email Address </label>
+                <div class="col-sm-9">
+                  <input type="text" name="email" value="{{userList.email}}" id="email" placeholder="Email" class="col-xs-10 col-sm-5" />
+                </div>
+              </div>
+
+              <!-- <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="user-level"> User Level </label>
+                <div class="col-sm-4">
+									<select name="user-level" class="form-control" id="user-level">
+                    <option value="1" {% if userList.user_level == 1 %}selected{% endif %}>Normal User</option>
+                    <option value="2" {% if userList.user_level == 2 %}selected{% endif %}>Author</option>
+                    <option value="3" {% if userList.user_level == 3 %}selected{% endif %}>Editor</option>
+                    <option value="4" {% if userList.user_level == 4 %}selected{% endif %}>Admin</option>
+									</select>
+                </div>
+              </div> -->
+
+              <!-- <div class="form-group">
+                <label class="col-sm-3 control-label no-paddong-right" for="user-status"> User Status </label>
+                <div class="col-sm-9">
+                  <div class="control-group">
+                    <div class="radio">
+                      <label>
+                        <input id="is-active" name="user-status" type="radio" value="yes" class="ace" {% if userList.is_active == 1 %} checked="checked" {% endif %} />
+                        <span class="lbl bigger-120"> Activate </span>
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input id="is-active" name="user-status" type="radio" value="no" class="ace" {% if userList.is_active == 0 %} checked="checked" {% endif %} />
+                        <span class="lbl bigger-120"> Deactivate </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+              <!-- Submit and reset button -->
+              <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9">
+                  <input type="hidden" name="user-id" value="{{userList.user_id}}">
+                  <input type="submit" class="btn btn-info" value="Submit">
+                  <button class="btn" type="reset">
+                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                    Reset
+                  </button>
+                </div>
+              </div>
+              <!-- Button Ends -->
+
+            </form>
+          </div>
+        </div>
+  {% endblock %}
+  {% endembed %}
+{% endblock %}
+{% block javascript %}
+{{ parent() }}
+<script src="/skin/default/admin/js/autosize.js"></script>
+<script src="/skin/default/admin/js/jquery.inputlimiter.1.3.1.js"></script>
+<script type="text/javascript">
+  $("document").ready(function(){
+    $('#category-name').keyup(function() {
+      var categoryName = $('#category-name');
+      if($.trim($(categoryName)).length === 0){
+        $("#category-slug").val('');
+      } else {
+        $.ajax({
+          type: "POST",
+          url: "/en/admin/generate-slug",
+          dataType:"json",
+          cache: false,
+          data: categoryName,
+          success: function(data) {
+              if(data.status == "success") {
+                $("#category-slug").val(data.slug);
+              } else {
+                $("#category-slug").val('');
+              }
+          }
+        });
+      }
+    });
+
+    autosize($('textarea[class*=autosize]'));
+
+    $('textarea.limited').inputlimiter({
+      remText: '%n character%s remaining...',
+      limitText: 'max allowed : %n.'
+    });
+
+  });
+</script>
+{% endblock %}
