@@ -20,17 +20,17 @@
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="category-name"> Category Slug </label>
+                <label class="col-sm-3 control-label no-padding-right" for="category-slug"> Category Slug </label>
 
                 <div class="col-sm-9">
-                  <input type="text" name="categorySlug" id="category-slug" placeholder="Category Slug" class="col-xs-10 col-sm-5" />
+                  <input type="text" name="category-slug" id="category-slug" placeholder="Category Slug" class="col-xs-10 col-sm-5" />
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-3 control-label no-paddong-right" for="category-description"> Category Description </label>
                 <div class="col-sm-4">
-                  <textarea name="categoryDescription" class="form-control limited" id="category-description" maxlength="50"></textarea>
+                  <textarea name="category-description" class="form-control limited" id="category-description" maxlength="50"></textarea>
                 </div>
               </div>
 
@@ -57,7 +57,7 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="parent-category"> Parent </label>
                 <div class="col-sm-4">
-									<select name="categoryParent" class="form-control" id="parent-category">
+									<select name="parent-category" class="form-control" id="parent-category">
                     <option value="0">None</option>
                     {% for value in categoryNames %}
                       <option value="{{value.category_id}}"> {{ value.category_name }} </option>

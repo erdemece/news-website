@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseInterface;
 class SiteSettings {
 
   protected $pdo = null;
-  protected $app = null;
+  public $app = null;
   protected $view = null;
 
   public function __construct( \Slim\App $app ) {
@@ -32,11 +32,12 @@ class SiteSettings {
           $row['setting'],
           $row['value']
         );
+        $request->withAttribute(
+          $row['setting'],
+          $row['value']
+        );
       }
-      $response = $next(
-        $request,
-        $response
-      );
+      $response = $next( $request, $response );
     }
     return $response;
   }

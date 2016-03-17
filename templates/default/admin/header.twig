@@ -291,10 +291,10 @@
         <!-- #section:basics/navbar.user_menu -->
         <li class="light-blue">
           <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-            <img class="nav-user-photo" src="/skin/default/admin/avatars/user.jpg" alt="Jason's Photo" />
+            <img class="nav-user-photo" src="/skin/default/admin/avatars/avatar2.png" alt="{{username}}'s Photo" />
             <span class="user-info">
               <small>Welcome,</small>
-              Jason
+              {{username}}
             </span>
 
             <i class="ace-icon fa fa-caret-down"></i>
@@ -308,17 +308,10 @@
               </a>
             </li>
 
-            <li>
-              <a href="profile.html">
-                <i class="ace-icon fa fa-user"></i>
-                Profile
-              </a>
-            </li>
-
             <li class="divider"></li>
 
             <li>
-              <a href="#">
+              <a href="/logout">
                 <i class="ace-icon fa fa-power-off"></i>
                 Logout
               </a>

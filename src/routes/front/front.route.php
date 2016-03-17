@@ -4,10 +4,8 @@ $app->get('/', function ($request, $response, $args) {
     // Sample log message
     $this->logger->info("Slim-Skeleton '/' route");
 
-  $data_category = $this->Category->getCategoryListTopMenu();
-
     return $this->view->render($response, 'front/home.twig', [
-        'categories' => $data_category
+      'flash' => $this->flash->getMessages()
     ]);
 });
 
@@ -16,35 +14,7 @@ $app->get('/article/{articlename}/{articleid}', function ($request, $response, $
     // Sample log message
     $this->logger->info("Slim-Skeleton '/' route");
 
-    $data_category = $this->Category->getCategoryListTopMenu();
-    return $this->view->render($response, 'front/article.twig', [
-        'categories' => $data_category
-    ]);
-});
-
-
-
-$app->get('/login', function ($request, $response, $args) {
-    // Sample log message
-    $this->logger->info("Slim-Skeleton '/' route");
-
-    $data_category = $this->Category->getCategoryListTopMenu();
-
-    return $this->view->render($response, 'front/login.twig', [
-        'categories' => $data_category
-    ]);
-});
-
-
-$app->get('/register', function ($request, $response, $args) {
-    // Sample log message
-    $this->logger->info("Slim-Skeleton '/' route");
-
-    $data_category = $this->Category->getCategoryListTopMenu();
-
-    return $this->view->render($response, 'front/register.twig', [
-        'categories' => $data_category
-    ]);
+    return $this->view->render($response, 'front/article.twig');
 });
 
 
@@ -52,11 +22,9 @@ $app->get('/contact', function ($request, $response, $args) {
     // Sample log message
     $this->logger->info("Slim-Skeleton '/' route");
 
-    $data_category = $this->Category->getCategoryListTopMenu();
 
-    return $this->view->render($response, 'front/contactus.twig', [
-        'categories' => $data_category
-    ]);
+
+    return $this->view->render($response, 'front/contactus.twig');
 });
 
 
@@ -64,22 +32,14 @@ $app->get('/info/{pagename}', function ($request, $response, $args) {
     // Sample log message
     $this->logger->info("Slim-Skeleton '/' route");
 
-    $data_category = $this->Category->getCategoryListTopMenu();
-
-    return $this->view->render($response, 'front/' . $args['pagename'] . '.twig', [
-        'categories' => $data_category
-    ]);
+    return $this->view->render($response, 'front/' . $args['pagename'] . '.twig');
 });
 
 $app->get('/author/{authorname}/{authorid}', function ($request, $response, $args) {
     // Sample log message
     $this->logger->info("Slim-Skeleton '/' route");
 
-    $data_category = $this->Category->getCategoryListTopMenu();
-
-    return $this->view->render($response, 'front/author.twig', [
-        'categories' => $data_category
-    ]);
+    return $this->view->render($response, 'front/author.twig');
 });
 
 
@@ -93,21 +53,21 @@ $app->get('/category/{categoryname}/{categoryid}', function ($request, $response
 
      //$dt2 = $this->Other->sendContactForm('a', 'b', '1.2.3.4', 'abc', '', 'active', 'yes');
     // $dt = $this->Others->getTagsx();
-   $data_video = $this->Video->getAllVideos();
+  //  $data_video = $this->Video->getAllVideos();
   // $data_news = $this->Article->getAllArticles();
   // $data_comments = $this->Comment->getAllItemComments('1');
   // $data_stats = $this->Statistics->getMostReadArticles('all');
-  $data_category = $this->Category->getCategoryListTopMenu();
+  // $data_category = $this->Category->getCategoryListTopMenu();
 
-    return $this->view->render($response, 'front/category.twig', [
-    //     //'news' => $data,
-        'categories' => $data_category,
-    //     // 'news' => $data_news,
-    //     // 'comments' => $data_comments
-    //     // 'stats' => $data_stats
-    'videos' => $data_video
-    //     //'dts' => $dt
-    ]);
+    // return $this->view->render($response, 'front/category.twig', [
+    // //     //'news' => $data,
+    //     'categories' => $data_category,
+    // //     // 'news' => $data_news,
+    // //     // 'comments' => $data_comments
+    // //     // 'stats' => $data_stats
+    // 'videos' => $data_video
+    // //     //'dts' => $dt
+    // ]);
 
 });
 

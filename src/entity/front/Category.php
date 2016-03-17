@@ -11,19 +11,16 @@ class Category {
   }
 
   public function getCategoryListTopMenu () {
-
-    $sql = 'SELECT * FROM category ORDER BY category_order ASC';
-
-    $query = $this->pdo->prepare($sql);
-
-    if ( $query->execute( ) ) {
-      if ( $query->rowCount() ) {
-         $data = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $data;
-      } else {
-        echo 'nothing to show';
+    $sql = 'SELECT category_id, category_parent_id, category_name FROM category ORDER BY category_order ASC';
+    $stmt = $this->pdo->prepare($sql);
+    if ( $stmt->execute( ) ) {
+      if ( $stmt->rowCount() ) {
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
       }
+      return false;
     }
+    return false;
   }
 
 
@@ -31,11 +28,11 @@ class Category {
 
     $sql = 'SELECT * FROM category WHERE category_id = :category_id ORDER BY category_order ASC';
 
-    $query = $this->pdo->prepare($sql);
+    $stmt = $this->pdo->prepare($sql);
 
-    if ( $query->execute( array( 'category_id' => $catid ) ) ) {
-      if ( $query->rowCount() ) {
-         $data = $query->fetchAll(PDO::FETCH_ASSOC);
+    if ( $stmt->execute( array( 'category_id' => $catid ) ) ) {
+      if ( $stmt->rowCount() ) {
+         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $data;
       } else {
         echo 'nothing to show';

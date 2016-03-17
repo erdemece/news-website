@@ -15,11 +15,13 @@ $app->get('/en/admin/add-category', function ($request, $response, $args) {
 
     $this->logger->info("Slim-Skeleton '/' route");
 
-    $insert = $this->category->addCategory( $request->getParsedBody()['categoryParent'],
-                                  $request->getParsedBody()['categoryName'],
-                                  $request->getParsedBody()['categorySlug'],
-                                  $request->getParsedBody()['categoryDescription'],
-                                  $request->getParsedBody()['visibility'] );
+    $categoryParent      = filter_var( $request->getParsedBody()['category-parent'], FILTER_SANITIZE_INT );
+    $categoryName        = filter_var( $request->getParsedBody()['category-name'], FILTER_SANITIZE_STRING );
+    $categorySlug        = filter_var( $request->getParsedBody()['category-slug'], FILTER_SANITIZE_STRING );
+    $categoryDescription = filter_var( $request->getParsedBody()['category-description'], FILTER_SANITIZE_STRING );
+    $visibility          = filter_var( $request->getParsedBody()['visibility'], FILTER_SANITIZE_STRING );
+
+    $insert = $this->category->addCategory( $categoryParent, $categoryName, $categorySlug, $categoryDescription, $visibility );
 
     if( $insert !== false ) {
       $this->flash->addMessage('success', 'Category succesfuly added!');
@@ -35,11 +37,11 @@ $app->get('/en/admin/add-category', function ($request, $response, $args) {
 
     $this->logger->info("Edit Category '/edit-category' route");
 
-    $updateCategory = $this->category->editCategory( $request->getParsedBody()['categoryId'],
-                                  $request->getParsedBody()['categoryParent'],
-                                  $request->getParsedBody()['categoryName'],
-                                  $request->getParsedBody()['categorySlug'],
-                                  $request->getParsedBody()['categoryDescription'],
+    $updateCategory = $this->category->editCategory( $request->getParsedBody()['category-id'],
+                                  $request->getParsedBody()['category-parent'],
+                                  $request->getParsedBody()['category-name'],
+                                  $request->getParsedBody()['category-slug'],
+                                  $request->getParsedBody()['category-description'],
                                   $request->getParsedBody()['visibility'] );
 
     if( $updateCategory !== false ) {
@@ -47,7 +49,7 @@ $app->get('/en/admin/add-category', function ($request, $response, $args) {
       return $response->withStatus(301)->withHeader('Location', '/en/admin/category-list');
     } else {
       $this->flash->addMessage('danger', $this->category->errors);
-      return $response->withStatus(301)->withHeader('Location', '/en/admin/edit-category/'.$request->getParsedBody()['categoryId']);
+      return $response->withStatus(301)->withHeader('Location', '/en/admin/edit-category/'.$request->getParsedBody()['category-id']);
     }
 
   });
@@ -125,8 +127,8 @@ $app->post('/en/admin/generate-slug', function ($request, $response, $args) {
 
   $response = $response->withHeader('Content-type', 'application/json');
 
-  if ( !empty( $request->getParsedBody()['categoryName'] ) ) {
-    return json_encode( array( 'status' => 'success', 'slug' => $this->slugger->slugify( $request->getParsedBody()['categoryName'] ) ) );
+  if ( !empty( $request->getParsedBody()['category-name'] ) ) {
+    return json_encode( array( 'status' => 'success', 'slug' => $this->slugger->slugify( $request->getParsedBody()['category-name'] ) ) );
   }
 
 });

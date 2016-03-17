@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kurdish Question user activation email</title>
+</head>
+<body>
+    <h1>Hi there {{session.username}},</h1>
+    <p>Please click activation link bellow to activate your membership.</p>
+    <br />
+    <p> <a href="http://local.dev/register/email/activation/{{user_activation_key}}">http://local.dev/register/email/activation/{{session.user_activation_key}}</a></p>
+</body>
+</html>

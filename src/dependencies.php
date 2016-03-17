@@ -60,7 +60,16 @@ $container['slugger'] = function ($c) {
 //PHPMailer class
 $container['phpmailer'] = function($c) {
   $settings = $c->get('settings')['phpmailer'];
-  $phpmailer = new PHPMailer;
+    $phpmailer = new PHPMailer;
+  if ( $settings['isSmtp'] == 'yes' ) {
+    $phpmailer->isSMTP();                               // Set mailer to use SMTP
+    $phpmailer->Host = $settings['smtp_host'];          // Specify main and backup SMTP servers
+    $phpmailer->SMTPAuth = $settings['smtp_auth'];      // Enable SMTP authentication
+    $phpmailer->Username = $settings['smtp_username'];  // SMTP username
+    $phpmailer->Password = $settings['smtp_password'];  // SMTP password
+    $phpmailer->SMTPSecure = $settings['smtp_secure'];  // Enable TLS encryption, `ssl` also accepted
+    $phpmailer->Port = $settings['smtp_port'];          // TCP port to connect to
+  }
   $phpmailer->setFrom($settings['from'], 'Mailer');
   $phpmailer->isHTML($settings['ishtml']);
   return $phpmailer;
@@ -88,7 +97,7 @@ $container['date'] = function($c) {
 };
 
 // CategoryList class
-$container['Category'] = function($c) {
+$container['frontCategory'] = function($c) {
   return new front\Category($c);
 };
 
@@ -115,4 +124,9 @@ $container['Statistics'] = function($c) {
 // Site Settings
 $container['siteSettings'] = function($c) {
   return new admin\Settings($c);
+};
+
+// Site Settings
+$container['users'] = function($c) {
+  return new entity\Users($c);
 };
