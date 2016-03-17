@@ -1,5 +1,6 @@
 /logs/*
 /templates/cache/*
 !/logs/README.md
+/src/settings.php
 README.md
 CONTRIBUTING.md
